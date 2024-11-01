@@ -1,0 +1,14 @@
+version: '3'
+services:
+  frontend:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+  backend:
+    image: your-backend-image
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=your-database-url
