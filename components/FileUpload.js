@@ -34,18 +34,23 @@ const FileUpload = () => {
     formData.append("files", file);
 
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/upload`, formData, {
-        onUploadProgress: (event) => {
-          const progressPercentage = Math.round((event.loaded * 100) / event.total);
-          setProgress((prevProgress) => ({
-            ...prevProgress,
-            [file.name]: progressPercentage,
-          }));
-        },
-        
-      });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/upload`,
+        formData,
+        {
+          onUploadProgress: (event) => {
+            const progressPercentage = Math.round(
+              (event.loaded * 100) / event.total
+            );
+            setProgress((prevProgress) => ({
+              ...prevProgress,
+              [file.name]: progressPercentage,
+            }));
+          },
+        }
+      );
       setSuccessMessage(response.data.message);
-    } catch (error) {
+    } catch {
       setError(`Failed to upload ${file.name}. Please try again.`);
       setSuccessMessage(null);
     } finally {
@@ -59,7 +64,9 @@ const FileUpload = () => {
     <div className={styles.file_upload_container}>
       <div {...getRootProps({ className: styles.dropzone })}>
         <input {...getInputProps()} className={styles.file_input} />
-        <p className={styles.dropzone_text}>Drag & drop files here, or click to select files</p>
+        <p className={styles.dropzone_text}>
+          Drag & drop files here, or click to select files
+        </p>
       </div>
 
       {isLoading && <Spinner />}
@@ -76,7 +83,10 @@ const FileUpload = () => {
       {error && <ErrorNotification message={error} />}
       {successMessage && <div className="success">{successMessage}</div>}
 
-      <button className={styles.upload_button} onClick={() => files.forEach(uploadFile)}>
+      <button
+        className={styles.upload_button}
+        onClick={() => files.forEach(uploadFile)}
+      >
         Upload All
       </button>
     </div>

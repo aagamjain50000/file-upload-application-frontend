@@ -6,8 +6,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          {/* Custom head elements, such as links to stylesheets or meta tags */}
-          <link rel="stylesheet" href="/path/to/your/styles.css" />
+
         </Head>
         <body>
           <Main />

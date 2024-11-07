@@ -1,8 +1,10 @@
 # Use Node.js base image
-FROM node:16
+FROM node:20
 WORKDIR /app
+ENV NEXT_PUBLIC_API_URL=http://localhost:8000
 COPY package*.json ./
-RUN npm install
+RUN npm i --production
 COPY . .
+RUN npm run build
 EXPOSE 3000
-CMD ["npm", "run", "dev"]
+CMD ["npm", "start"]

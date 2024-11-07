@@ -1,4 +1,4 @@
-version: '3'
+# version: '3'
 services:
   frontend:
     build: .
@@ -7,7 +7,7 @@ services:
     environment:
       - NEXT_PUBLIC_API_URL=http://localhost:8000
   backend:
-    image: your-backend-image
+    image: nginx:latest  
     ports:
       - "8000:8000"
     environment:

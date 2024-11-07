@@ -11,7 +11,7 @@ const FileList = () => {
       try {
         const response = await getFiles();
         setFiles(response.files); // Adjust based on API response structure
-      } catch (err) {
+      } catch {
         setError("Failed to fetch files");
       }
     };
